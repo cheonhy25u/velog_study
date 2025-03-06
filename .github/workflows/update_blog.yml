@@ -5,7 +5,7 @@ on:
     branches:
       - main # 또는 워크플로우를 트리거하고 싶은 브랜치 이름
   schedule:
-    - cron: "0 7 * * *" # 매일 오후 7시에 업로드
+    - cron: "0 6 * * *" # 매일 오후 7시에 업로드
 
 jobs:
   update_blog:
@@ -19,7 +19,13 @@ jobs:
         run: |
           git config --global user.name 'cheonhy25u'
           git config --global user.email 'kor01chs@gmail.com'
-          git push https://${{ secrets.GH_PAT }}@github.com/cheonhy25u/velog_study.git
+          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/cheonhy25u/velog_study.git
+          git push origin main
+
+
+          # 깃허브 아이디
+          # 깃허브 이메일
+          # https://${{SecretKey}}@github.com/깃허브 아이디/레포지토리이름.git
 
       - name: Set up Python
         uses: actions/setup-python@v2

@@ -19,7 +19,7 @@ jobs:
         run: |
           git config --global user.name 'cheonhy25u'
           git config --global user.email 'kor01chs@gmail.com'
-          git push https://${{ secrets.GH_PAT }}@github.com/cheonhy25u/velog_study.git
+          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/cheonhy25u/velog_study.git
 
       - name: Set up Python
         uses: actions/setup-python@v2

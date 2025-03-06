@@ -19,13 +19,7 @@ jobs:
         run: |
           git config --global user.name 'cheonhy25u'
           git config --global user.email 'kor01chs@gmail.com'
-          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/cheonhy25u/velog_study.git
-          git push origin main
-
-
-          # 깃허브 아이디
-          # 깃허브 이메일
-          # https://${{SecretKey}}@github.com/깃허브 아이디/레포지토리이름.git
+          git push https://${{ secrets.GH_PAT }}@github.com/cheonhy25u/velog_study.git
 
       - name: Set up Python
         uses: actions/setup-python@v2

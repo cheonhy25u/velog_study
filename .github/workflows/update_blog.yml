@@ -3,9 +3,9 @@ name: Update Blog Posts
 on:
   push:
     branches:
-      - main # 또는 워크플로우를 트리거하고 싶은 브랜치 이름
+      - main
   schedule:
-    - cron: "0 6 * * *" # 매일 오후 7시에 업로드
+    - cron: "0 6 * * *" # 매일 오후 7시에 실행
 
 jobs:
   update_blog:
@@ -13,16 +13,20 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false # 기본 인증 제거
 
-      - name: Push changes
+      - name: Configure Git
         run: |
           git config --global user.name 'cheonhy25u'
           git config --global user.email 'kor01chs@gmail.com'
-          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/cheonhy25u/velog_study.git
+
+      - name: Set GitHub Token
+        run: echo "GH_PAT=${{ secrets.GH_PAT }}" >> $GITHUB_ENV
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: "3.x"
 
